@@ -1,0 +1,2 @@
+import GamePage from '../GamePage';
+export default function Page() { return <GamePage game="board" />; }

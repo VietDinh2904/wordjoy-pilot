@@ -2,8 +2,9 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { Check, ChevronLeft, ChevronRight, Dices, Grid3X3, Headphones, Home, Layers3, Library, Link2, Medal, Menu, Play, RotateCcw, Sparkles, SpellCheck, Star, Users, Volume2, X, Zap } from 'lucide-react';
+import Link from 'next/link';
 
-type GameId = 'listen' | 'spell' | 'team' | 'crossword' | 'flashcard' | 'snake' | 'board';
+export type GameId = 'listen' | 'spell' | 'team' | 'crossword' | 'flashcard' | 'snake' | 'board';
 type AgeId = 'all' | '3-5' | '6-8' | '9-12';
 
 const words = [
@@ -37,7 +38,6 @@ function speak(word: string) {
 }
 
 export default function HomePage() {
-  const [game, setGame] = useState<GameId>('listen');
   const [age, setAge] = useState<AgeId>('all');
   const [stars, setStars] = useState(12);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -74,19 +74,13 @@ export default function HomePage() {
         if (!templates.some((item) => item.id === value.game) || !ages.some((item) => item.id === value.age)) {
           throw new Error('Game hoặc nhóm tuổi không hợp lệ.');
         }
-        setGame(value.game!);
         setAge(value.age!);
+        window.location.assign(`/games/${value.game}`);
         return { game: value.game, age: value.age, status: 'ready' };
       },
     }, { signal: lifecycle.signal })).catch(() => undefined);
     return () => lifecycle.abort();
   }, []);
-
-  const reward = (amount = 1) => setStars((current) => {
-    const next = current + amount;
-    window.localStorage.setItem('wordjoy-stars', String(next));
-    return next;
-  });
 
   const visibleTemplates = useMemo(() => age === 'all' ? templates : templates.filter((item) => item.kicker.startsWith(age.replace('-', '–')) || (item.id === 'board' && (age === '6-8' || age === '9-12'))), [age]);
 
@@ -134,19 +128,18 @@ export default function HomePage() {
           <div className="template-grid">
             {visibleTemplates.map((item) => {
               const Icon = item.icon;
-              return <button key={item.id} className={`template-card ${game === item.id ? 'chosen' : ''}`} style={{ '--accent': item.color, '--soft': item.soft } as React.CSSProperties} onClick={() => setGame(item.id)}>
+              return <Link key={item.id} href={`/games/${item.id}`} className="template-card" style={{ '--accent': item.color, '--soft': item.soft } as React.CSSProperties}>
                 <span className="template-icon"><Icon size={24} /></span><span className="template-copy"><small>{item.kicker}</small><strong>{item.title}</strong><span>{item.desc}</span></span><span className="play-circle"><Play size={17} fill="currentColor" /></span>
-              </button>;
+              </Link>;
             })}
           </div>
-          <GameStage game={game} reward={reward} stars={stars} />
         </div>
       </section>
     </main>
   );
 }
 
-function GameStage({ game, reward, stars }: { game: GameId; reward: (amount?: number) => void; stars: number }) {
+export function GameStage({ game, reward, stars }: { game: GameId; reward: (amount?: number) => void; stars: number }) {
   const selected = templates.find((item) => item.id === game)!;
   const Icon = selected.icon;
   return <section className="game-stage" style={{ '--game-accent': selected.color, '--game-soft': selected.soft } as React.CSSProperties}>
