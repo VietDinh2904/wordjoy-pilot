@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { Check, ChevronLeft, ChevronRight, Dices, Grid3X3, Headphones, Home, Layers3, Library, Link2, Medal, Menu, Play, RotateCcw, Sparkles, SpellCheck, Star, Users, Volume2, X, Zap } from 'lucide-react';
-import Link from 'next/link';
 
 export type GameId = 'listen' | 'spell' | 'team' | 'crossword' | 'flashcard' | 'snake' | 'board';
 type AgeId = 'all' | '3-5' | '6-8' | '9-12';
@@ -128,9 +127,9 @@ export default function HomePage() {
           <div className="template-grid">
             {visibleTemplates.map((item) => {
               const Icon = item.icon;
-              return <Link key={item.id} href={`/games/${item.id}`} className="template-card" style={{ '--accent': item.color, '--soft': item.soft } as React.CSSProperties}>
+              return <a key={item.id} href={`/games/${item.id}`} className="template-card" style={{ '--accent': item.color, '--soft': item.soft } as React.CSSProperties}>
                 <span className="template-icon"><Icon size={24} /></span><span className="template-copy"><small>{item.kicker}</small><strong>{item.title}</strong><span>{item.desc}</span></span><span className="play-circle"><Play size={17} fill="currentColor" /></span>
-              </Link>;
+              </a>;
             })}
           </div>
         </div>
