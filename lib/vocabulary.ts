@@ -1,3 +1,5 @@
+import { flyersExtras } from './flyers-vocabulary';
+
 export type Level = 'starters' | 'movers' | 'flyers';
 
 export type VocabWord = {
@@ -7,6 +9,7 @@ export type VocabWord = {
   topic: string;
   emoji: string;
   sprite?: number;
+  flyerSprite?: number;
 };
 
 // A compact, reviewed pilot set. Level labels are teaching groups, not a complete exam wordlist.
@@ -61,9 +64,9 @@ export const vocabulary: VocabWord[] = [
   { word: 'mountain', meaning: 'ngọn núi', level: 'movers', topic: 'Thiên nhiên', emoji: '⛰️' },
   { word: 'forest', meaning: 'khu rừng', level: 'movers', topic: 'Thiên nhiên', emoji: '🌲' },
   { word: 'rainbow', meaning: 'cầu vồng', level: 'movers', topic: 'Thiên nhiên', emoji: '🌈' },
-  { word: 'castle', meaning: 'lâu đài', level: 'flyers', topic: 'Địa điểm', emoji: '🏰' },
+  { word: 'castle', meaning: 'lâu đài', level: 'flyers', topic: 'Địa điểm', emoji: '🏰', flyerSprite: 18 },
   { word: 'museum', meaning: 'bảo tàng', level: 'flyers', topic: 'Địa điểm', emoji: '🏛️' },
-  { word: 'airport', meaning: 'sân bay', level: 'flyers', topic: 'Đi lại', emoji: '🛫' },
+  { word: 'airport', meaning: 'sân bay', level: 'flyers', topic: 'Đi lại', emoji: '🛫', flyerSprite: 19 },
   { word: 'astronaut', meaning: 'phi hành gia', level: 'flyers', topic: 'Nghề nghiệp', emoji: '🧑‍🚀' },
   { word: 'engineer', meaning: 'kỹ sư', level: 'flyers', topic: 'Nghề nghiệp', emoji: '👷' },
   { word: 'mechanic', meaning: 'thợ máy', level: 'flyers', topic: 'Nghề nghiệp', emoji: '🧑‍🔧' },
@@ -71,6 +74,41 @@ export const vocabulary: VocabWord[] = [
   { word: 'adventure', meaning: 'cuộc phiêu lưu', level: 'flyers', topic: 'Đời sống', emoji: '🧭' },
   { word: 'competition', meaning: 'cuộc thi', level: 'flyers', topic: 'Đời sống', emoji: '🏆' },
   { word: 'environment', meaning: 'môi trường', level: 'flyers', topic: 'Thiên nhiên', emoji: '🌍' },
+  // Supplementary topic words cross-checked against the three linked learning lists.
+  { word: 'chicken', meaning: 'con gà', level: 'starters', topic: 'Con vật', emoji: '🐔' },
+  { word: 'crocodile', meaning: 'cá sấu', level: 'starters', topic: 'Con vật', emoji: '🐊' },
+  { word: 'goat', meaning: 'con dê', level: 'starters', topic: 'Con vật', emoji: '🐐' },
+  { word: 'hippo', meaning: 'hà mã', level: 'starters', topic: 'Con vật', emoji: '🦛' },
+  { word: 'lizard', meaning: 'thằn lằn', level: 'starters', topic: 'Con vật', emoji: '🦎' },
+  { word: 'sheep', meaning: 'con cừu', level: 'starters', topic: 'Con vật', emoji: '🐑' },
+  { word: 'arm', meaning: 'cánh tay', level: 'starters', topic: 'Cơ thể & sức khỏe', emoji: '💪' },
+  { word: 'ear', meaning: 'tai', level: 'starters', topic: 'Cơ thể & sức khỏe', emoji: '👂' },
+  { word: 'eye', meaning: 'mắt', level: 'starters', topic: 'Cơ thể & sức khỏe', emoji: '👁️' },
+  { word: 'hand', meaning: 'bàn tay', level: 'starters', topic: 'Cơ thể & sức khỏe', emoji: '✋' },
+  { word: 'mouth', meaning: 'miệng', level: 'starters', topic: 'Cơ thể & sức khỏe', emoji: '👄' },
+  { word: 'nose', meaning: 'mũi', level: 'starters', topic: 'Cơ thể & sức khỏe', emoji: '👃' },
+  { word: 'carrot', meaning: 'cà rốt', level: 'starters', topic: 'Đồ ăn', emoji: '🥕' },
+  { word: 'coconut', meaning: 'quả dừa', level: 'starters', topic: 'Đồ ăn', emoji: '🥥' },
+  { word: 'rice', meaning: 'cơm hoặc gạo', level: 'starters', topic: 'Đồ ăn', emoji: '🍚' },
+  { word: 'watermelon', meaning: 'dưa hấu', level: 'starters', topic: 'Đồ ăn', emoji: '🍉' },
+  { word: 'sofa', meaning: 'ghế sô pha', level: 'starters', topic: 'Nhà cửa', emoji: '🛋️' },
+  { word: 'ruler', meaning: 'thước kẻ', level: 'starters', topic: 'Trường học', emoji: '📏' },
+  { word: 'sand', meaning: 'cát', level: 'starters', topic: 'Thiên nhiên', emoji: '🏖️' },
+  { word: 'shell', meaning: 'vỏ sò', level: 'starters', topic: 'Thiên nhiên', emoji: '🐚' },
+  { word: 'relative', meaning: 'họ hàng', level: 'flyers', topic: 'Gia đình', emoji: '👪' },
+  { word: 'neighbour', meaning: 'hàng xóm', level: 'flyers', topic: 'Gia đình', emoji: '🏘️' },
+  { word: 'adult', meaning: 'người lớn', level: 'flyers', topic: 'Gia đình', emoji: '🧑' },
+  { word: 'teenager', meaning: 'thiếu niên', level: 'flyers', topic: 'Gia đình', emoji: '🧒' },
+  { word: 'passenger', meaning: 'hành khách', level: 'flyers', topic: 'Đi lại', emoji: '🧳' },
+  { word: 'pyramid', meaning: 'kim tự tháp', level: 'flyers', topic: 'Địa điểm', emoji: '🔺' },
+  { word: 'railway', meaning: 'đường sắt', level: 'flyers', topic: 'Đi lại', emoji: '🛤️' },
+  { word: 'tent', meaning: 'cái lều', level: 'flyers', topic: 'Địa điểm', emoji: '⛺' },
+  { word: 'envelope', meaning: 'phong thư', level: 'flyers', topic: 'Đời sống', emoji: '✉️' },
+  { word: 'postcard', meaning: 'bưu thiếp', level: 'flyers', topic: 'Đời sống', emoji: '📮' },
+  { word: 'secretary', meaning: 'thư ký', level: 'flyers', topic: 'Nghề nghiệp', emoji: '🗂️' },
+  { word: 'exam', meaning: 'bài kiểm tra', level: 'flyers', topic: 'Trường học', emoji: '📝' },
+  { word: 'worried', meaning: 'lo lắng', level: 'flyers', topic: 'Cảm xúc', emoji: '😟' },
+  ...flyersExtras,
 ];
 
 export const lookupWord = (raw: string) => vocabulary.find((item) => item.word === raw.trim().toLowerCase());

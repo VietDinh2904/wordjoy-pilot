@@ -18,7 +18,7 @@ const templates = [
   { id: 'spell' as GameId, title: 'Ghép Chữ', kicker: '6–8 tuổi', desc: 'Xếp chữ cái thành từ hoàn chỉnh.', icon: SpellCheck, color: '#ef6d46', soft: '#fff0e9' },
   { id: 'team' as GameId, title: 'Đấu Trường', kicker: '9–12 tuổi', desc: 'Quiz nhanh cho hai đội cùng chơi.', icon: Users, color: '#6e4bd8', soft: '#f0ebff' },
   { id: 'crossword' as GameId, title: 'Ô Chữ', kicker: '9–12 tuổi', desc: 'Điền tên con vật theo gợi ý.', icon: Grid3X3, color: '#0f9d7a', soft: '#e4f8f2' },
-  { id: 'flashcard' as GameId, title: 'Ghép Thẻ Chibi', kicker: '3–5 tuổi', desc: 'Ghép 20 cặp hình và nghĩa.', icon: Layers3, color: '#df5b9a', soft: '#fdebf4' },
+  { id: 'flashcard' as GameId, title: 'Thẻ Hình Flyers', kicker: '9–12 tuổi', desc: 'Lật thẻ hai mặt hoặc ghép 20 cặp.', icon: Layers3, color: '#df5b9a', soft: '#fdebf4' },
   { id: 'snake' as GameId, title: 'Rắn Nối Từ', kicker: '6–8 tuổi', desc: 'Hai người tự viết từ thay phiên.', icon: Link2, color: '#44a83d', soft: '#eaf8e7' },
   { id: 'hangman' as GameId, title: 'Hangman', kicker: '9–12 tuổi', desc: 'Đoán chữ qua gợi ý nghĩa.', icon: SpellCheck, color: '#7958d6', soft: '#f0eaff' },
   { id: 'board' as GameId, title: 'Board Game', kicker: '6–12 tuổi', desc: 'Hai bàn cờ mẫu cho hai người.', icon: Dices, color: '#e79024', soft: '#fff3df' },

@@ -1,3 +1,3 @@
-import MemoryGame from './MemoryGame';
+import FlashcardExperience from './FlashcardExperience';
 
-export default function Page() { return <MemoryGame />; }
+export default function Page() { return <FlashcardExperience />; }
