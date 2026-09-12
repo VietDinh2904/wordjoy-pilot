@@ -1,2 +1,3 @@
-import GamePage from '../GamePage';
-export default function Page() { return <GamePage game="flashcard" />; }
+import MemoryGame from './MemoryGame';
+
+export default function Page() { return <MemoryGame />; }

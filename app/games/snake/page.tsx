@@ -1,2 +1,3 @@
-import GamePage from '../GamePage';
-export default function Page() { return <GamePage game="snake" />; }
+import WordChainGame from './WordChainGame';
+
+export default function Page() { return <WordChainGame />; }

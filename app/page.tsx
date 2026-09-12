@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Check, ChevronLeft, ChevronRight, Dices, Grid3X3, Headphones, Home, Layers3, Library, Link2, Medal, Menu, Play, RotateCcw, Sparkles, SpellCheck, Star, Users, Volume2, X, Zap } from 'lucide-react';
 
-export type GameId = 'listen' | 'spell' | 'team' | 'crossword' | 'flashcard' | 'snake' | 'board';
+export type GameId = 'listen' | 'spell' | 'team' | 'crossword' | 'flashcard' | 'snake' | 'board' | 'hangman';
 type AgeId = 'all' | '3-5' | '6-8' | '9-12';
 
 const words = [
@@ -18,8 +18,9 @@ const templates = [
   { id: 'spell' as GameId, title: 'Ghép Chữ', kicker: '6–8 tuổi', desc: 'Xếp chữ cái thành từ hoàn chỉnh.', icon: SpellCheck, color: '#ef6d46', soft: '#fff0e9' },
   { id: 'team' as GameId, title: 'Đấu Trường', kicker: '9–12 tuổi', desc: 'Quiz nhanh cho hai đội cùng chơi.', icon: Users, color: '#6e4bd8', soft: '#f0ebff' },
   { id: 'crossword' as GameId, title: 'Ô Chữ', kicker: '9–12 tuổi', desc: 'Điền tên con vật theo gợi ý.', icon: Grid3X3, color: '#0f9d7a', soft: '#e4f8f2' },
-  { id: 'flashcard' as GameId, title: 'Thẻ Từ', kicker: '3–5 tuổi', desc: 'Lật thẻ, nghe và ghi nhớ từ.', icon: Layers3, color: '#df5b9a', soft: '#fdebf4' },
-  { id: 'snake' as GameId, title: 'Rắn Nối Từ', kicker: '6–8 tuổi', desc: 'Nối từ mới bằng chữ cái cuối.', icon: Link2, color: '#44a83d', soft: '#eaf8e7' },
+  { id: 'flashcard' as GameId, title: 'Ghép Thẻ Chibi', kicker: '3–5 tuổi', desc: 'Ghép 20 cặp hình và nghĩa.', icon: Layers3, color: '#df5b9a', soft: '#fdebf4' },
+  { id: 'snake' as GameId, title: 'Rắn Nối Từ', kicker: '6–8 tuổi', desc: 'Hai người tự viết từ thay phiên.', icon: Link2, color: '#44a83d', soft: '#eaf8e7' },
+  { id: 'hangman' as GameId, title: 'Hangman', kicker: '9–12 tuổi', desc: 'Đoán chữ qua gợi ý nghĩa.', icon: SpellCheck, color: '#7958d6', soft: '#f0eaff' },
   { id: 'board' as GameId, title: 'Board Game', kicker: '6–12 tuổi', desc: 'Hai bàn cờ mẫu cho hai người.', icon: Dices, color: '#e79024', soft: '#fff3df' },
 ];
 
@@ -61,7 +62,7 @@ export default function HomePage() {
       inputSchema: {
         type: 'object',
         properties: {
-          game: { type: 'string', enum: ['listen', 'spell', 'team', 'crossword', 'flashcard', 'snake', 'board'] },
+          game: { type: 'string', enum: ['listen', 'spell', 'team', 'crossword', 'flashcard', 'snake', 'board', 'hangman'] },
           age: { type: 'string', enum: ['all', '3-5', '6-8', '9-12'] },
         },
         required: ['game', 'age'],
@@ -92,13 +93,12 @@ export default function HomePage() {
           <button className="icon-button sidebar-close" onClick={() => setSidebarOpen(false)} aria-label="Đóng menu"><X size={20} /></button>
         </div>
         <nav aria-label="Điều hướng chính">
-          <button className="nav-item active"><Home size={19} />Trang chơi</button>
-          <button className="nav-item"><Library size={19} />Bộ bài của tôi</button>
-          <button className="nav-item"><Medal size={19} />Thành tích</button>
+          <a className="nav-item active" href="/"><Home size={19} />Trang chơi</a>
+          <a className="nav-item" href="/words"><Library size={19} />Tra từ vựng</a>
         </nav>
         <div className="sidebar-note">
           <div className="note-icon"><Sparkles size={20} /></div>
-          <strong>Pilot nhẹ & nhanh</strong><p>Một bộ từ chạy được trên nhiều mẫu game.</p>
+          <strong>Tra từ rồi chơi</strong><p>Chọn Starters, Movers hoặc Flyers và luyện bằng game.</p>
         </div>
         <div className="profile"><div className="avatar">AN</div><div><strong>An Nhiên</strong><span>Học viên nhỏ</span></div><ChevronRight size={18} /></div>
       </aside>
@@ -107,18 +107,18 @@ export default function HomePage() {
       <section className="workspace">
         <header className="topbar">
           <button className="icon-button menu-button" onClick={() => setSidebarOpen(true)} aria-label="Mở menu"><Menu size={22} /></button>
-          <div className="breadcrumb"><span>Khám phá</span><ChevronRight size={15} /><strong>Animal Friends</strong></div>
+          <div className="breadcrumb"><span>Khám phá</span><ChevronRight size={15} /><strong>Starters · Movers · Flyers</strong></div>
           <div className="star-pill"><Star size={17} fill="currentColor" /><strong>{stars}</strong><span>sao</span></div>
         </header>
 
         <div className="content">
           <section className="welcome-card">
-            <img src="/wordjoy-hero.png" alt="Các bạn nhỏ học tiếng Anh qua trò chơi" />
-            <div className="welcome-copy"><span className="eyebrow">HỌC 10 PHÚT MỖI NGÀY</span><h1>Chơi một chút.<br />Giỏi lên mỗi ngày.</h1><p>Chọn trò chơi phù hợp và bắt đầu ngay với bộ từ <strong>Animal Friends</strong>.</p></div>
+            <img src="/wordjoy-owl.png" alt="Cú nhỏ WordJoy cầm sách" />
+            <div className="welcome-copy"><span className="eyebrow">HỌC TỪ VỰNG THEO CÁCH VUI NHẤT</span><h1>Tra từ. Chơi game.<br />Nhớ từ thật lâu!</h1><p>Khám phá từ vựng Starters–Flyers cùng cú nhỏ WordJoy.</p><a className="hero-cta" href="/words">📖 Mở sổ tay từ vựng</a></div>
           </section>
 
           <div className="section-heading">
-            <div><span className="section-kicker">7 MẪU GAME</span><h2>Chọn cách chơi</h2></div>
+            <div><span className="section-kicker">8 MẪU GAME</span><h2>Chọn cách chơi</h2></div>
             <div className="age-filters" aria-label="Lọc theo độ tuổi">
               {ages.map((item) => <button key={item.id} className={age === item.id ? 'selected' : ''} onClick={() => setAge(item.id)}>{item.label}</button>)}
             </div>
